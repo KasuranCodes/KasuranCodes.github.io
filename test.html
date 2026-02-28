@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art Deco Portfolio</title>
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+
+<style>
+
+/* ===================== */
+/* THEME VARIABLES */
+/* ===================== */
+
+:root {
+    --bg: #0e0e0e;
+    --text: #f5f5f5;
+    --nav-bg: rgba(20,20,20,0.6);
+    --card-bg: #1b1b1b;
+    --accent: #d4af37;
+    --font-size: 16px;
+    --text-highlight: transparent;
+}
+
+body {
+    margin: 0;
+    font-family: "Courier New", monospace;
+    background: var(--bg);
+    color: var(--text);
+    font-size: var(--font-size);
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* LIGHT THEME */
+body.light {
+    --bg: #f4f1eb;
+    --text: #111;
+    --nav-bg: rgba(255,255,255,0.6);
+    --card-bg: #ffffff;
+    --accent: #111;
+}
+
+/* GREEN THEME (from index.html) */
+body.green {
+    --bg: #344033;
+    --text: #f5f5f5;
+    --nav-bg: rgba(52,64,51,0.6);
+    --card-bg: #2b332b;
+    --accent: #7fb069;
+}
+
+/* ACCESSIBILITY STATES */
+
+body.high-contrast {
+    --bg: #000;
+    --text: #fff;
+    --accent: #0ff;
+}
+
+body.large-text {
+    --font-size: 20px;
+}
+
+body.text-highlight p,
+body.text-highlight h1,
+body.text-highlight h2 {
+    background: yellow;
+    padding: 4px;
+}
+body.highlight-lightgreen p,
+body.highlight-lightgreen h1,
+body.highlight-lightgreen h2 {
+    background: lightgreen;
+    padding: 4px;
+}
+body.highlight-darkgreen p,
+body.highlight-darkgreen h1,
+body.highlight-darkgreen h2 {
+    background: darkgreen;
+    padding: 4px;
+}
+body.highlight-purple p,
+body.highlight-purple h1,
+body.highlight-purple h2 {
+    background: purple;
+    padding: 4px;
+}
+body.highlight-lightblue p,
+body.highlight-lightblue h1,
+body.highlight-lightblue h2 {
+    background: lightblue;
+    padding: 4px;
+}
+
+body.reduce-motion * {
+    transition: none !important;
+    animation: none !important;
+}
+
+/* ===================== */
+/* ART DECO BACKGROUND */
+/* ===================== */
+
+#bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.pattern line {
+    stroke: var(--accent);
+    stroke-width: 1;
+    opacity: 0.15;
+}
+
+/* ===================== */
+/* NAVIGATION */
+/* ===================== */
+
+.nav-container {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 18px 40px;
+    border-radius: 60px;
+    backdrop-filter: blur(15px);
+    background: var(--nav-bg);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text);
+}
+
+.deco {
+    width: 80px;
+    height: 40px;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 2;
+}
+
+/* ===================== */
+/* ACCESSIBILITY BUTTON */
+/* ===================== */
+
+.accessibility-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.accessibility-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--nav-bg);
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+}
+/* THEME ICON & PANEL */
+.theme-selector { display: inline-block; position: relative; }
+.icon-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--nav-bg);
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.icon-btn:hover { transform: scale(1.1); }
+
+.theme-panel {
+    position: absolute;
+    top: 48px; /* start just below button border */
+    right: 0;
+    background: var(--card-bg);
+    border-radius: 10px 10px 20px 20px;
+    overflow: hidden;
+    width: 50px; /* same as button width */
+    height: 0;
+    transition: height 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0; /* remove padding when closed so it's fully hidden */
+    pointer-events: none;
+    z-index: 9998; /* keep panel under the button */
+}
+.theme-panel.open { height: 140px; padding: 6px 0; pointer-events: auto; }
+
+.theme-btn { position: relative; z-index: 9999; }
+
+.theme-panel .color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    margin: 0 auto;
+}
+.theme-panel .color-option.dark { background: #111; }
+.theme-panel .color-option.light { background: #fff; }
+.theme-panel .color-option:hover { transform: scale(1.1); }
+.theme-panel .color-option.green { background: #344033; }
+
+/* HIGHLIGHT SELECTOR & PANEL */
+.highlight-selector { position: relative; display: inline-block; }
+.highlight-panel {
+    position: absolute;
+    /* center vertically relative to the icon button */
+    top: 50%;
+    transform: translateY(-50%);
+    right: 48px; /* slide out left of the button */
+    background: var(--card-bg);
+    border-radius: 10px 20px 20px 10px;
+    overflow: hidden;
+    width: 0;
+    height: 50px;
+    transition: width 0.3s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* vertically centre children */
+    gap: 8px;
+    padding: 0;
+    pointer-events: none;
+    z-index: 9998;
+}
+.highlight-panel.open { width: 210px; padding: 0 6px; pointer-events: auto; }
+.highlight-btn { position: relative; z-index: 9999; }
+
+.highlight-panel .color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    margin: 0 auto;
+}
+.highlight-panel .color-option.yellow { background: yellow; }
+.highlight-panel .color-option.lightgreen { background: lightgreen; }
+.highlight-panel .color-option.darkgreen { background: darkgreen; }
+.highlight-panel .color-option.purple { background: purple; }
+.highlight-panel .color-option.lightblue { background: lightblue; }
+.highlight-panel .color-option.none { background: transparent; }
+.highlight-panel .color-option:hover { transform: scale(1.1); }
+
+.accessibility-panel {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    margin-top: 0;
+    padding: 0;
+    background: var(--card-bg);
+    border-radius: 25px; /* more rounded corners */
+    min-width: 20px;
+    height: 0;
+    /* keep contents clipped when closed */
+    overflow: hidden;
+    transition: height 0.3s ease, padding 0.3s ease;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 2001;
+}
+
+.accessibility-panel.open {
+    height: auto;
+    padding: 12px;
+    pointer-events: auto;
+    /* tooltips can escape when open */
+    overflow: visible;
+}
+
+
+.accessibility-panel .icon-btn {
+    /* make each option a neat circle like the toolbar buttons */
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accessibility-panel button:not(.icon-btn) {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background: none;
+    border: 1px solid var(--accent);
+    color: var(--text);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.accessibility-panel button:not(.icon-btn):hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+#accessPanel > .icon-btn {
+    transition: all 0.2s;
+    position: relative;
+}
+
+#accessPanel > .icon-btn:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    /* place to left of panel, centered vertically */
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent);
+    color: var(--bg);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 9999; /* ensure tooltip always in front */
+    pointer-events: none;
+}
+
+/* Active state for toggled buttons */
+body.high-contrast #accessPanel > .icon-btn:nth-child(1),
+body.large-text #accessPanel > .icon-btn:nth-child(2),
+body.reduce-motion #accessPanel > .icon-btn:nth-child(4) {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Reset button spacing */
+#accessPanel > button:last-child {
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* ===================== */
+/* SECTIONS */
+/* ===================== */
+
+section {
+    padding: 120px 10%;
+    min-height: 100vh;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s ease;
+}
+
+section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.project-card {
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 20px;
+}
+
+.cta-btn {
+    padding: 10px 20px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* scroll indicators */
+.scroll-indicator {
+    position: fixed;
+    bottom: 10px;
+    font-size: 24px;
+    color: var(--text);
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    z-index: 3000;
+}
+.scroll-indicator.up { left: 40%; }
+.scroll-indicator.down { right: 40%; }
+.scroll-indicator.visible { opacity: 0.7; }
+
+/* about section images */
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.about-images {
+    display: flex;
+    gap: 20px; /* space between icons */
+}
+.about-images img {
+    display: block;
+    /* roughly three times previous baseline (was 15vw max) */
+    max-width: 45vw;
+    min-width: 180px;
+    height: auto;
+}
+
+/* Footer / icons: remove bullets and show inline */
+#footer .icons { list-style: none; margin: 0; padding: 0; }
+#footer .icons > li { display: inline-block; margin-right: 10px; vertical-align: middle; }
+#footer .icons li .label { display: none; }
+#footer .icons a.icon { color: var(--text); text-decoration: none; }
+
+/* responsive tweaks */
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 20px;
+    }
+    .nav-container {
+        top: 10px;
+    }
+    .accessibility-btn, .icon-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    .theme-panel,
+    .highlight-panel {
+        right: auto;
+        left: 10px;
+        top: auto;
+        bottom: 60px;
+    }
+    .theme-panel.open { width: auto; }
+    .highlight-panel.open { width: auto; }
+    .scroll-indicator.up { left: 20%; }
+    .scroll-indicator.down { right: 20%; }
+    section { padding: 80px 5%; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ART DECO BACKGROUND -->
+<svg id="bg" viewBox="0 0 1200 900" preserveAspectRatio="none">
+    <g class="pattern" id="patternGroup" stroke="var(--accent)" fill="none" stroke-width="2" opacity="0.12">
+        <!-- Art Deco semicircles / sunburst -->
+        <g transform="translate(600,160)">
+            <path d="M-420,160 A420,420 0 0 1 420,160" />
+            <path d="M-320,160 A320,320 0 0 1 320,160" />
+            <path d="M-220,160 A220,220 0 0 1 220,160" />
+            <path d="M-120,160 A120,120 0 0 1 120,160" />
+        </g>
+
+        <!-- Vertical stepped columns -->
+        <g>
+            <line x1="150" y1="220" x2="150" y2="820" />
+            <line x1="270" y1="260" x2="270" y2="760" />
+            <line x1="390" y1="300" x2="390" y2="700" />
+            <line x1="810" y1="300" x2="810" y2="700" />
+            <line x1="930" y1="260" x2="930" y2="760" />
+            <line x1="1050" y1="220" x2="1050" y2="820" />
+        </g>
+
+        <!-- Diamond motifs -->
+        <g>
+            <polygon points="600,320 640,360 600,400 560,360" />
+            <polygon points="600,420 660,480 600,540 540,480" opacity="0.08" />
+        </g>
+    </g>
+</svg>
+
+<!-- scroll indicators -->
+<div class="scroll-indicator up" aria-hidden="true">▲</div>
+<div class="scroll-indicator down" aria-hidden="true">▼</div>
+
+<!-- ACCESSIBILITY -->
+<div class="accessibility-wrapper">
+    <button class="accessibility-btn" onclick="toggleAccessibility()" aria-label="Accessibility options">📖</button>
+    <div class="accessibility-panel" id="accessPanel">
+        <button class="icon-btn" onclick="toggleClass('high-contrast')" aria-label="Toggle High Contrast" data-tooltip="High Contrast">🔲</button>
+        <button class="icon-btn" onclick="toggleClass('large-text')" aria-label="Toggle Large Text" data-tooltip="Large Text">🔤</button>
+        <div class="highlight-selector" style="margin-top:8px;">
+            <button class="icon-btn highlight-btn" onclick="toggleHighlightPanel()" aria-label="Text highlight colors" data-tooltip="Text Highlight">🖍️</button>
+            <div class="highlight-panel" id="highlightPanel">
+                <button class="color-option yellow" onclick="setHighlightColor('yellow')" title="Yellow"></button>
+                <button class="color-option lightgreen" onclick="setHighlightColor('lightgreen')" title="Light Green"></button>
+                <button class="color-option darkgreen" onclick="setHighlightColor('darkgreen')" title="Dark Green"></button>
+                <button class="color-option purple" onclick="setHighlightColor('purple')" title="Purple"></button>
+                <button class="color-option lightblue" onclick="setHighlightColor('lightblue')" title="Light Blue"></button>
+                <button class="color-option none" onclick="setHighlightColor('')" title="None" style="border-style:dashed;">×</button>
+            </div>
+        </div>
+        <button class="icon-btn" onclick="toggleClass('reduce-motion')" aria-label="Toggle Reduce Motion" data-tooltip="Reduce Motion">⏸️</button>
+        <button class="icon-btn" onclick="resetAccessibility()" aria-label="Reset preferences" data-tooltip="Reset">⟲</button>
+    </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-container">
+    <nav>
+        <svg class="deco" viewBox="0 0 100 50">
+            <path d="M0 50 L50 0 L100 50"/>
+        </svg>
+
+        <a href="#home">Home</a>
+        <a href="#projects">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+
+        <div class="theme-selector" style="position:relative;">
+            <button class="icon-btn theme-btn" onclick="toggleThemePanel()" aria-label="Theme options">🎨</button>
+            <div class="theme-panel" id="themePanel">
+                <button class="color-option dark" onclick="changeTheme('dark')" title="Dark"></button>
+                <button class="color-option green" onclick="changeTheme('green')" title="Green"></button>
+                <button class="color-option light" onclick="changeTheme('light')" title="Light"></button>
+            </div>
+        </div>
+
+        <svg class="deco" viewBox="0 0 100 50">
+            <path d="M0 50 L50 0 L100 50"/>
+        </svg>
+    </nav>
+</div>
+
+<section id="home">
+    <h1>Max McGill</h1>
+    <p>Art Deco inspired minimalist digital architect.</p>
+    <button class="cta-btn" onclick="location.href='#projects'">View Work</button>
+</section>
+
+<section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+        <div class="project-card">Project One</div>
+        <div class="project-card">Project Two</div>
+        <div class="project-card">Project Three</div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="about-content">
+        <div class="about-text">
+            <h2>About</h2>
+            <p>Geometry. Structure. Elegance.</p>
+        </div>
+        <div class="about-images">
+            <img src="images/github.png" alt="GitHub" width="100" />
+            <img src="images/frog.png" alt="Frog" width="100" />
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Email: max.mcgill.speaking@outlook.com</p>
+</section>
+
+<script>
+
+/* ===================== */
+/* BACKGROUND GRID */
+/* ===================== */
+
+const patternGroup = document.getElementById("patternGroup");
+
+for (let i = 0; i < window.innerWidth; i += 80) {
+    let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", i);
+    line.setAttribute("y1", 0);
+    line.setAttribute("x2", i);
+    line.setAttribute("y2", window.innerHeight);
+    patternGroup.appendChild(line);
+}
+
+for (let i = 0; i < window.innerHeight; i += 80) {
+    let line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", 0);
+    line.setAttribute("y1", i);
+    line.setAttribute("x2", window.innerWidth);
+    line.setAttribute("y2", i);
+    patternGroup.appendChild(line);
+}
+
+// Keep mouse and scroll offsets separate and combine them to avoid snapping
+let pgOffsetX = 0;
+let pgOffsetY = 0;
+let pgScrollY = 0;
+
+function setPatternTransform() {
+    // combine mouse offsets and scroll offset
+    const tx = pgOffsetX;
+    const ty = pgOffsetY + pgScrollY;
+    patternGroup.setAttribute("transform", `translate(${tx},${ty})`);
+}
+
+document.addEventListener("mousemove", e => {
+    pgOffsetX = (e.clientX / window.innerWidth - 0.5) * 30;
+    pgOffsetY = (e.clientY / window.innerHeight - 0.5) * 30;
+    setPatternTransform();
+});
+
+window.addEventListener("scroll", () => {
+    pgScrollY = window.scrollY * 0.05;
+    setPatternTransform();
+});
+
+/* ===================== */
+/* THEME */
+/* ===================== */
+
+function changeTheme(theme) {
+    // remove any theme classes
+    document.body.classList.remove("light", "green");
+    if (theme === "light") document.body.classList.add("light");
+    if (theme === "green") document.body.classList.add("green");
+    // collapse dropdown after selection
+    document.getElementById('themePanel').classList.remove('open');
+}
+
+function toggleThemePanel() {
+    document.getElementById('themePanel').classList.toggle('open');
+}
+
+/* ===================== */
+/* ACCESSIBILITY */
+/* ===================== */
+
+function toggleAccessibility() {
+    const panel = document.getElementById("accessPanel");
+    panel.classList.toggle('open');
+}
+
+function toggleClass(className) {
+    document.body.classList.toggle(className);
+}
+
+function setHighlightColor(color) {
+    const classes = ['highlight-yellow','highlight-lightgreen','highlight-darkgreen','highlight-purple','highlight-lightblue'];
+    document.body.classList.remove(...classes);
+    if (color) {
+        document.body.classList.add('highlight-' + color);
+    }
+    // close panel
+    document.getElementById('highlightPanel').classList.remove('open');
+}
+
+function toggleHighlightPanel() {
+    document.getElementById('highlightPanel').classList.toggle('open');
+}
+
+function resetAccessibility() {
+    document.body.classList.remove(
+        "high-contrast",
+        "large-text",
+        "reduce-motion",
+        "highlight-yellow",
+        "highlight-lightgreen",
+        "highlight-darkgreen",
+        "highlight-purple",
+        "highlight-lightblue"
+    );
+    const selector = document.getElementById('highlightColor');
+    if(selector) selector.value = '';
+}
+
+/* ===================== */
+/* SECTION ANIMATION */
+/* ===================== */
+
+// scroll indicators logic
+const upIndicator = document.querySelector('.scroll-indicator.up');
+const downIndicator = document.querySelector('.scroll-indicator.down');
+
+function updateScrollIndicators() {
+    const atTop = window.scrollY <= 0;
+    const atBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 2;
+    upIndicator.classList.toggle('visible', !atTop);
+    downIndicator.classList.toggle('visible', !atBottom);
+}
+
+window.addEventListener('scroll', updateScrollIndicators);
+window.addEventListener('resize', updateScrollIndicators);
+// initial
+updateScrollIndicators();
+
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+}, { threshold: 0.2 });
+
+sections.forEach(section => observer.observe(section));
+
+</script>
+
+<!-- Footer (imported from index.html) -->
+<footer id="footer" class="wrapper alt">
+    <div class="inner">
+        <ul class="icons">
+            <li>&copy; Max McGill. All rights reserved.</li>
+            <ul class="icons">
+                <li>Come Shiver my Timbers [</li>
+                <li>
+                    <a href="https://www.linkedin.com/in/max-mcgill" class="icon" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7 0h4.8v2.2h.1c.7-1.3 2.4-2.7 5-2.7C23.5 7.5 24 11 24 15.2V24h-5v-8.2c0-2-0.8-3.3-2.7-3.3-1.5 0-2.4 1-2.8 2v9.5h-5V8z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="icon" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.3.4.6.3 1 .6 1.4 1 .4.4.7.8 1 1.4.2.4.3 1.1.4 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.3-.3.6-.6 1-1 1.4-.4.4-.8.7-1.4 1-.4.2-1.1.3-2.3.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.3-1-.6-1.4-1-.4-.4-.7-.8-1-1.4-.2-.4-.3-1.1-.4-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.3.3-.6.6-1 1-1.4.4-.4.8-.7 1.4-1 .4-.2 1.1-.3 2.3-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.5a6.3 6.3 0 1 0 .001 12.6A6.3 6.3 0 0 0 12 5.7zm0 10.4a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0 0 1 0 8.2zm6.4-11.7a1.46 1.46 0 1 1-2.92 0 1.46 1.46 0 0 1 2.92 0z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/KasuranCodes" class="icon" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.69-3.88-1.38-3.88-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.75-1.56-2.56-.29-5.26-1.28-5.26-5.69 0-1.26.45-2.29 1.2-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.99.01 1.99.13 2.92.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.75.8 1.2 1.83 1.2 3.09 0 4.42-2.7 5.4-5.28 5.68.42.36.79 1.08.79 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.68.8.56C20.71 21.38 24 17.08 24 12c0-6.35-5.15-11.5-12-11.5z"/>
+                        </svg>
+                    </a>
+                </li>
+                <li>]</li>
+            </ul>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>
