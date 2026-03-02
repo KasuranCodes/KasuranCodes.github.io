@@ -97,9 +97,11 @@
 
 
 <section id="home">
-    <h1>Max McGill</h1>
-    <p>Software Developer, Robotics Engineer</p>
-    <button class="cta-btn" onclick="location.href='#projects'">View Work</button>
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; text-align: center;">
+        <h1>Max McGill</h1>
+        <p>Software Developer, Robotics Engineer</p>
+        <button class="cta-btn" onclick="location.href='#projects'">View Work</button>
+    </div>
 </section>
 
 <section id="projects">
@@ -133,7 +135,29 @@
         </div>
         <div class="project-card">
             <h2>Storyboard</h2>
+            <h3>Brief</h3>
+            <p>Storyboard is a work in progress project that I have been working on to create a game engine capable of rendering and animating 3D scenes in real-time. The engine is built using C and Vulkan, and it supports features such as lighting, shadows, and texture mapping.</p>
             
+            <h3>Overview</h3>
+            <p>Storyboard is designed to be a flexible and powerful tool for game developers, allowing them to create complex and immersive gaming experiences. The engine is built on top of the Vulkan API, which provides low-level access to the GPU and allows for high-performance rendering.</p>
+            <p>C was chosen for its performance and low-level control over system resources as well as my familiarity and enjoyment of it.</p>
+            
+            <h3>Spec</h3>
+            <ul>
+                <li>Real-Time 3D Rendering</li>
+                <li>Lighting and Shadows</li>
+                <li>Texture Mapping</li>
+                <li>Cross-Platform Support</li>
+                <ul>
+                    <li>Windows</li>
+                    <li>Linux</li>
+                </ul>
+                <li>Modular Architecture</li>
+                <ul>
+                    <li>Custom Scripts for game logic so that different genres and styles of games can be created.</li>
+                </ul>
+            </ul>
+
             
         </div>
         <div class="project-card">
@@ -151,7 +175,6 @@
         <div class="about-text">
             <h2>About</h2>
             <!-- <p>Anglin the Trigonometry. Structure. Elegance.</p> -->
-            <p></p>
             <p>Hi, my name is Max McGill. I am a software developer and engineer with a passion for Robotics.</p>
         </div>
         <div class="about-images">
@@ -160,10 +183,15 @@
         </div>
         <div class="about-text">
             <h3>Education</h3> 
-            <!-- <p>Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus.</p> -->
-            <p>I studied Engineering at Newcastle and Stafford College Group.</p>
-            <ul class="actions">
-                <li><a href="generic.html" class="button">Learn more</a></li>
+            <ul>
+                <li>Engineering - Newcastle Stafford College Group (NSCG)</li>
+                <li>AI and Robotics - Staffordshire Uni (Stoke)</li>
+                <li>Microsoft Azure AI Fundamentals</li>
+            </ul>
+            <h3>Certifications</h3> 
+            <ul>
+                <li>Microsoft Azure AI Fundamentals</li>
+                <li>Amazon Web Services (AWS)</li>
             </ul>
         </div>
     </div>

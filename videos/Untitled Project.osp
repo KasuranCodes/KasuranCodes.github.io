@@ -84,7 +84,7 @@
    "display": 0,
    "duration": 375.26666666666665,
    "effects": [],
-   "end": 285.03333333333336,
+   "end": 285.0333333333333,
    "gravity": 4,
    "has_audio": {
     "Points": [
@@ -369,7 +369,7 @@
      }
     ]
    },
-   "position": 0,
+   "position": 0.0,
    "reader": {
     "acodec": "aac",
     "audio_bit_rate": 127517,
@@ -656,63 +656,7 @@
   }
  ],
  "effects": [],
- "files": [
-  {
-   "acodec": "aac",
-   "audio_bit_rate": 127517,
-   "audio_stream_index": 1,
-   "audio_timebase": {
-    "den": 44100,
-    "num": 1
-   },
-   "channel_layout": 3,
-   "channels": 2,
-   "display_ratio": {
-    "den": 1,
-    "num": 2
-   },
-   "duration": 375.25299072265625,
-   "file_size": "27860937",
-   "fps": {
-    "den": 1,
-    "num": 30
-   },
-   "has_audio": true,
-   "has_single_image": false,
-   "has_video": true,
-   "height": 640,
-   "interlaced_frame": false,
-   "metadata": {
-    "compatible_brands": "isomiso2avc1mp41",
-    "encoder": "Lavf60.16.100",
-    "handler_name": "#Mainconcept MP4 Sound Media Handler",
-    "language": "eng",
-    "major_brand": "isom",
-    "minor_version": "512"
-   },
-   "path": "./download.mp4",
-   "pixel_format": 0,
-   "pixel_ratio": {
-    "den": 1,
-    "num": 1
-   },
-   "sample_rate": 44100,
-   "top_field_first": true,
-   "type": "FFmpegReader",
-   "vcodec": "h264",
-   "video_bit_rate": 74245,
-   "video_length": "11257",
-   "video_stream_index": 0,
-   "video_timebase": {
-    "den": 15360,
-    "num": 1
-   },
-   "width": 1280,
-   "media_type": "video",
-   "id": "WY5WAUUDBI",
-   "image": "thumbnail/WY5WAUUDBI.png"
-  }
- ],
+ "files": [],
  "duration": 385.26666666666665,
  "scale": 3.6785337409386356,
  "tick_pixels": 100,
@@ -807,17 +751,17 @@
   {
    "name": "txtVideoCodec",
    "type": "QLineEdit",
-   "value": "libx264"
+   "value": "libx265"
   },
   {
    "name": "txtVideoBitRate",
    "type": "QLineEdit",
-   "value": "5 Mb/s"
+   "value": "23 crf"
   },
   {
    "name": "txtAudioCodec",
    "type": "QLineEdit",
-   "value": "libmp3lame"
+   "value": "aac"
   },
   {
    "name": "txtSampleRate",
@@ -837,22 +781,22 @@
   {
    "name": "txtAudioBitrate",
    "type": "QLineEdit",
-   "value": "256 kb/s"
+   "value": "128 kb/s"
   },
   {
    "name": "cboSimpleProjectType",
    "type": "QComboBox",
-   "value": 4
+   "value": 0
   },
   {
    "name": "cboSimpleTarget",
    "type": "QComboBox",
-   "value": 12
+   "value": 17
   },
   {
    "name": "cboSimpleVideoProfile",
    "type": "QComboBox",
-   "value": 0
+   "value": 87
   },
   {
    "name": "cboSimpleQuality",
@@ -862,7 +806,7 @@
   {
    "name": "txtFileName",
    "type": "QLineEdit",
-   "value": "Untitled Project"
+   "value": "Mistyvideo"
   },
   {
    "name": "txtExportFolder",
@@ -985,7 +929,7 @@
      "image": "thumbnail/WY5WAUUDBI.png"
     },
     "old_values": [],
-    "transaction": "b6ed7982-fff6-4b43-ba8d-5dc8d9af36d3"
+    "transaction": "7adf7104-1e08-4a47-b8ce-66e55ffae4ec"
    },
    {
     "type": "insert",
@@ -1627,7 +1571,7 @@
      "title": "download.mp4"
     },
     "old_values": [],
-    "transaction": "5dc24d9c-8a38-493a-8b0f-19ad19caebd9"
+    "transaction": "984104d9-c606-4d03-8702-ad252dbbccf1"
    },
    {
     "type": "update",
@@ -2278,7 +2222,7 @@
      "file_id": "WY5WAUUDBI",
      "title": "download.mp4"
     },
-    "transaction": "5dc24d9c-8a38-493a-8b0f-19ad19caebd9"
+    "transaction": "11f97bbe-f498-469d-bdbb-83ba7f1b8ac5"
    },
    {
     "type": "insert",
@@ -2292,7 +2236,7 @@
      "id": "5G2NFK9DJZ"
     },
     "old_values": [],
-    "transaction": "27228b09-9505-4884-a67d-3c13f9072d11"
+    "transaction": "61b3c85c-6085-4140-9e5f-a529dd64de0d"
    },
    {
     "type": "insert",
@@ -2313,7 +2257,7 @@
       "id": "5G2NFK9DJZ"
      }
     ],
-    "transaction": "2ab34108-c2cc-4a9c-9cac-68e33639af91"
+    "transaction": "d33f25fb-8fe0-409a-9bdb-04a50d1c3e1f"
    },
    {
     "type": "insert",
@@ -3590,7 +3534,7 @@
       "title": "download.mp4"
      }
     ],
-    "transaction": "32ecdc41-70ee-4766-b03f-ea4eb3f762e5"
+    "transaction": "c35d89f0-9358-4b7b-b15d-d5575c028414"
    },
    {
     "type": "update",
@@ -4241,7 +4185,7 @@
      "file_id": "WY5WAUUDBI",
      "title": "download.mp4"
     },
-    "transaction": "32ecdc41-70ee-4766-b03f-ea4eb3f762e5"
+    "transaction": "dc2a14a0-9119-4a1a-92a8-7292834f2ecb"
    },
    {
     "type": "insert",
@@ -6153,7 +6097,7 @@
       "id": "QVXG5WOB2Z"
      }
     ],
-    "transaction": "983f596c-0e6f-4f63-8e12-0cb3dff13f6b"
+    "transaction": "c6df9445-d78a-4d68-8a9f-70dfed2a62fb"
    },
    {
     "type": "update",
@@ -6804,7 +6748,7 @@
      "file_id": "WY5WAUUDBI",
      "title": "download.mp4"
     },
-    "transaction": "983f596c-0e6f-4f63-8e12-0cb3dff13f6b"
+    "transaction": "8d0498a6-1213-492f-8a1b-e2c15d47482b"
    },
    {
     "type": "update",
@@ -7455,7 +7399,7 @@
      "title": "download.mp4",
      "id": "AD68V1EGH4"
     },
-    "transaction": "f110b26b-4c73-4175-9d5e-eaf04e9ae640"
+    "transaction": "51bdde95-0542-4cd9-b3d9-ef51a81eb6ba"
    },
    {
     "type": "delete",
@@ -8100,7 +8044,7 @@
      "file_id": "WY5WAUUDBI",
      "title": "download.mp4"
     },
-    "transaction": "42a4316f-61ba-4a83-a65d-98e3537f2475"
+    "transaction": "56dd4f74-c288-436b-a52a-e9cd869b3a71"
    },
    {
     "type": "delete",
@@ -8745,7 +8689,7 @@
      "title": "download.mp4",
      "id": "QVXG5WOB2Z"
     },
-    "transaction": "8fb1352a-048c-4523-83d8-a4c478305c80"
+    "transaction": "f7f0bc8a-7676-47da-b7b4-39eea863a08c"
    }
   ],
   "redo": []
