@@ -100,7 +100,11 @@
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; text-align: center;">
         <h1>Max McGill</h1>
         <p>Software Developer, Robotics Engineer</p>
-        <button class="cta-btn" onclick="location.href='#projects'">View Work</button>
+        <div class = "home-buttons">
+            <button class="cta-btn" onclick="location.href='#projects'">View Work</button>
+            <button class="cta-btn" onclick="location.href='#about'">About me</button>
+            <button class="cta-btn" onclick="location.href='#contact'">Get in Touch</button>
+        </div>
     </div>
 </section>
 
@@ -112,7 +116,7 @@
             <span class="image left"><img src="images/misty.jpg" width = 300px/></span>
             <h2>Overview</h2>
             <p>Misty is a multi-functional pre-built robot that I have been programming to achieve multiple objectives:</p>
-            <ul class = "alt">
+            <ul>
                 <li>1 | Receptionist - I have created a program that allows Misty to use her camera to identify QR codes, answer questions from guests, and check guests into a database.</li>
                 <li>2 | Following People - Using the example programs, Misty is capable of detecting and following people whether that's by driving towards them or just turning in place so she can see them.</li>
             </ul>
@@ -129,7 +133,7 @@
         </div>
         <div class="project-card">
             <h2>Roller Coaster Automation</h2>
-            <span class="image left"><img src="images/stm.jpg" width = 300px/></span>
+            <span><img src="images/stm.jpg" width = 300px/></span>
             <p>This project involved automating a roller coaster ride using a combination of sensors, actuators, and control systems. The goal was to create a seamless and safe experience for riders while optimizing the ride's performance.</p>
             <p>An STM microcontroller was used to monitor and control the braking system so that is safe for users. It allows a user to input physical parameters such as weight, speed, brake force, brake time, and pulse distance through a serial terminal during startup. These values are stored and used by the system to simulate or manage braking behaviour. The system operates using a structured state machine, ensuring the device moves through defined operating modes such as initial setup, manual control, automatic operation, and safe mode.</p>
         </div>
@@ -158,15 +162,14 @@
                 </ul>
             </ul>
 
-            
         </div>
-        <div class="project-card">
+        <!-- <div class="project-card">
             <h2>Robotic Drone Skins Module</h2>
             <span class="image left"><img src="images/Soapomorph.png" width = 300px/></span>
 
 
             
-        </div>
+        </div> -->
     </div>
 </section>
 
@@ -176,6 +179,108 @@
             <h2>About</h2>
             <!-- <p>Anglin the Trigonometry. Structure. Elegance.</p> -->
             <p>Hi, my name is Max McGill. I am a software developer and engineer with a passion for Robotics.</p>
+            <h3>Skills</h3>
+            <div class="skills-grid">
+                <div class="project-card">
+                    <h4>Programming Languages</h4>
+                    <ul>
+                        <li>C</li>
+                        <li>C++</li>
+                        <li>C#</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>Frameworks &amp; Tools</h4>
+                    <ul>
+                        <li>Vulkan</li>
+                        <li>Git</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>Areas of Expertise</h4>
+                    <ul>
+                        <li>Robotics</li>
+                        <li>Software Engineering</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>Soft Skills</h4>
+                    <ul>
+                        <li>Problem Solving</li>
+                        <li>Adaptability</li>
+                        <li>Teamwork</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>Engineering</h4>
+                    <ul>
+                        <li>Mechanical Engineering</li>
+                        <li>Civil Engineering</li>
+                        <li>Electrical Engineering</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>Software Development</h4>
+                    <ul>
+                        <li>Object-Oriented Programming</li>
+                        <li>Software Design Patterns</li>
+                        <li>Version Control</li>
+                        <li>Agile Methodologies</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>Robotics</h4>
+                    <ul>
+                        <li>Sensor Integration</li>
+                        <li>Actuator Control</li>
+                        <li>Computer Vision</li>
+                        <li>Path Planning</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>Operating Systems</h4>
+                    <ul>
+                        <li>Windows</li>
+                        <li>Linux</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>AI</h4>
+                    <ul>
+                        <li>Machine Learning</li>
+                        <li>Reinforcement Learning</li>
+                        <li>Natural Language Processing</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <h4>Technical Skills</h4>
+                    <ul>
+                        <li>AutoCAD</li>
+                        <li>Soldering</li>
+                        <li>Mechanics</li>
+                        <li>Electronics</li>
+                        <li>Product Design</li>
+                        <li>Business</li>
+                        <li>Project Management</li>
+                        <li>Team Management</li>
+                        <li>Design</li>
+                        <li>Computer-Aided Design (CAD)</li>
+                        <li>Embedded System Programming</li>
+                        <li>AI</li>
+                        <li>Reinforcement Learning</li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Interests</h3>
+            <ul>
+                <li>Robotics</li>
+                <li>Game Development</li>
+                <li>AI and Machine Learning</li>
+                <li>Open Source Software</li>
+                <li>Electronic Hardware</li>
+            </ul>
+            <p>One example of something, I am working on is a robotic arm which I decided to continue work on as not just a hobby but also as my project for college. In this, I needed to use my computer skills, problem solving skills, and technical knowledge in order to create a design that is functional, budget friendly, and simple enough to assemble. I started this project a few years ago and it required me to adapt and learn to use different resources/ tools that I had no experience in. Programming in C++ and 3D modelling were two of the skills that I learnt in order to help achieve my end goal.  </p>
         </div>
         <div class="about-images">
             <img src="images/github.png" alt="GitHub" width="100" />
@@ -184,9 +289,8 @@
         <div class="about-text">
             <h3>Education</h3> 
             <ul>
-                <li>Engineering - Newcastle Stafford College Group (NSCG)</li>
-                <li>AI and Robotics - Staffordshire Uni (Stoke)</li>
-                <li>Microsoft Azure AI Fundamentals</li>
+                <li>Distinction in Engineering - Newcastle Stafford College Group (NSCG)</li>
+                <li>Expected First in BSc AI and Robotics - Staffordshire Uni (Stoke)</li>
             </ul>
             <h3>Certifications</h3> 
             <ul>
@@ -200,29 +304,9 @@
 <section id="contact">
     <h2>Contact</h2>
     <p>Email: max.mcgill.speaking@outlook.com</p>
-    <ul class="icons">
-        <li>
-            <a href="https://www.linkedin.com/in/max-mcgill" class="icon" aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7 0h4.8v2.2h.1c.7-1.3 2.4-2.7 5-2.7C23.5 7.5 24 11 24 15.2V24h-5v-8.2c0-2-0.8-3.3-2.7-3.3-1.5 0-2.4 1-2.8 2v9.5h-5V8z"/>
-                </svg>
-            </a>
-        </li>
-        <li>
-            <a href="https://www.instagram.com/max.mcgill.nexus/" class="icon" aria-label="Instagram">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.2 2.3.4.6.3 1 .6 1.4 1 .4.4.7.8 1 1.4.2.4.3 1.1.4 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.9-.4 2.3-.3.6-.6 1-1 1.4-.4.4-.8.7-1.4 1-.4.2-1.1.3-2.3.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.3-1-.6-1.4-1-.4-.4-.7-.8-1-1.4-.2-.4-.3-1.1-.4-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.9.4-2.3.3-.6.6-1 1-1.4.4-.4.8-.7 1.4-1 .4-.2 1.1-.3 2.3-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.5a6.3 6.3 0 1 0 .001 12.6A6.3 6.3 0 0 0 12 5.7zm0 10.4a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0 0 1 0 8.2zm6.4-11.7a1.46 1.46 0 1 1-2.92 0 1.46 1.46 0 0 1 2.92 0z"/>
-                </svg>
-            </a>
-        </li>
-        <li>
-            <a href="https://github.com/KasuranCodes" class="icon" aria-label="GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.38 7.86 10.9.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.69-3.88-1.38-3.88-1.38-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.75-1.56-2.56-.29-5.26-1.28-5.26-5.69 0-1.26.45-2.29 1.2-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.99.01 1.99.13 2.92.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.75.8 1.2 1.83 1.2 3.09 0 4.42-2.7 5.4-5.28 5.68.42.36.79 1.08.79 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.68.8.56C20.71 21.38 24 17.08 24 12c0-6.35-5.15-11.5-12-11.5z"/>
-                </svg>
-            </a>
-        </li>
-    </ul>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/max-mcgill">Max McGill </a></p>
+    <p>GitHub: <a href="https://github.com/KasuranCodes">KasuranCodes</a></p>
+    <p>Instagram: <a href="https://www.instagram.com/max.mcgill.nexus/">max.mcgill.nexus</a></p>
 </section>
 
 <!-- Footer (imported from index.html) -->
