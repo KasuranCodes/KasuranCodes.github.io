@@ -577,6 +577,31 @@ section.show {
     margin-bottom: 24px;
 }
 
+.project-specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 12px;
+    margin: 0 0 32px;
+}
+
+.project-specs > div {
+    min-width: 0;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background: var(--card-bg);
+}
+
+.project-specs dt {
+    margin-bottom: 6px;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.project-specs dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
 .project-detail img,
 .project-detail video {
     display: block;

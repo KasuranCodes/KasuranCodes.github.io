@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mOSs | Max McGill</title>
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/main2.css">
+</head>
+<body>
+    <div class="nav-container">
+        <nav>
+            <button class="mobile-nav-btn" onclick="toggleMobileNav()" aria-label="Open navigation" aria-expanded="false" aria-controls="siteNav"><i class="fas fa-bars" aria-hidden="true"></i></button>
+            <svg class="deco" viewBox="0 0 100 50"><path d="M0 50 L50 0 L100 50"/></svg>
+            <div class="nav-links" id="siteNav">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#projects">Work</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+                <div class="theme-selector" style="position:relative;">
+                    <button class="icon-btn theme-btn" onclick="toggleThemePanel()" aria-label="Theme options" aria-expanded="false" aria-controls="themePanel"><i class="fas fa-palette" aria-hidden="true"></i></button>
+                    <div class="theme-panel" id="themePanel">
+                        <button class="color-option dark" onclick="changeTheme('dark')" title="Dark"></button>
+                        <button class="color-option green" onclick="changeTheme('green')" title="Green"></button>
+                        <button class="color-option light" onclick="changeTheme('light')" title="Light"></button>
+                    </div>
+                </div>
+            </div>
+            <svg class="deco" viewBox="0 0 100 50"><path d="M0 50 L50 0 L100 50"/></svg>
+        </nav>
+    </div>
+
+    <main class="project-detail">
+        <h1>mOSs</h1>
+        <img src="images/mOSs.svg" alt="mOSs project logo">
+        <p>mOSs is a custom Linux distribution project derived from Ubuntu and inspired by Kubuntu, SteamOS, and Bazzite. The longer-term aim is an installable system with desktop, gaming, and mobile-oriented variants. The active public implementation is currently the ubuntu-decK project: a set of scripts and packaging for adding a SteamOS-style gaming session to Kubuntu rather than a finished standalone distribution image.</p>
+
+        <h2>Project roadmap and current deliverable</h2>
+        <dl class="project-specs">
+            <div><dt>Base system</dt><dd>Ubuntu / Kubuntu with KDE Plasma in the current installer</dd></div>
+            <div><dt>Current deliverable</dt><dd>SteamOS-style Game Mode session setup for an existing Kubuntu installation</dd></div>
+            <div><dt>Game session</dt><dd>Gamescope fullscreen session running Steam's gamepad UI</dd></div>
+            <div><dt>Display target</dt><dd>Launcher currently specifies 1920 × 1080; comments describe adjusting it for the target monitor</dd></div>
+            <div><dt>Session manager</dt><dd>SDDM login session and AccountsService default-session integration</dd></div>
+            <div><dt>Planned variants</dt><dd>Conventional desktop and mobile options are part of the broader mOSs goal</dd></div>
+        </dl>
+
+        <h2>Game Mode installation</h2>
+        <p>The ubuntu-decK setup script installs Steam, MangoHud, Gamescope, SDDM, AccountsService, and Mesa utilities through APT. It writes a Gamescope session launcher and a Wayland session entry so Game Mode appears alongside Plasma at login. The launcher runs Gamescope fullscreen and starts Steam using its gamepad UI mode.</p>
+        <p>The script also creates session-switching helpers and a Plasma desktop shortcut. A user can choose to boot directly into Game Mode; otherwise the regular login screen remains available. The switch command changes the default session and coordinates the end of the current desktop or Gamescope session so the login manager can start the selected mode.</p>
+
+        <h2>System integration and configuration</h2>
+        <p>This project operates at the installed-system level: it adds packages, session files, helper commands, sudoers entries, and SDDM configuration. The Gamescope launcher currently specifies a 1920 × 1080 target, and its own comments note that this should match the user's display. The source also contains logic for choosing the default session and optionally enabling automatic login into Game Mode.</p>
+        <p>These details distinguish the current work from a custom kernel or a complete image builder. The public mOSs README describes a future ISO and installer, while the current active code is focused on configuring an existing Kubuntu desktop.</p>
+
+        <h2>Experimental status and limitations</h2>
+        <p>The ubuntu-decK README explicitly calls the installer very experimental and warns that there is currently no way to reverse it. Although the script has session-switching and autologin-disable logic, the repository does not provide a complete system uninstaller that restores every installed package and changed configuration. Treat it as a test-machine project, inspect the script before use, and keep a recovery plan.</p>
+        <p>The public repositories do not yet document a released mOSs ISO or working mobile variant. Those remain goals rather than current features.</p>
+
+        <h2>Source repositories</h2>
+        <p><a href="https://github.com/KasuranCodes/mOSs" target="_blank" rel="noopener noreferrer">mOSs project overview ↗</a></p>
+        <p><a href="https://github.com/KasuranCodes/ubuntu-decK" target="_blank" rel="noopener noreferrer">ubuntu-decK installer and current development ↗</a></p>
+        <p><a href="https://github.com/KasuranCodes/ubuntu-decK/blob/main/ubuntu-decK/setup-steamos-mode.sh" target="_blank" rel="noopener noreferrer">Read the Game Mode setup script ↗</a></p>
+        <a class="project-back" href="index.html#projects">Back to Work</a>
+    </main>
+
+    <script>
+        function changeTheme(theme) {
+            document.body.classList.remove("light", "green");
+            if (theme === "light") document.body.classList.add("light");
+            if (theme === "green") document.body.classList.add("green");
+            document.getElementById("themePanel").classList.remove("open");
+            document.querySelector(".theme-btn").setAttribute("aria-expanded", "false");
+        }
+
+        function toggleThemePanel() {
+            const panel = document.getElementById("themePanel");
+            const isOpen = panel.classList.toggle("open");
+            document.querySelector(".theme-btn").setAttribute("aria-expanded", String(isOpen));
+        }
+
+        function toggleMobileNav() {
+            const menu = document.getElementById("siteNav");
+            const isOpen = menu.classList.toggle("open");
+            const button = document.querySelector(".mobile-nav-btn");
+            document.body.classList.toggle("mobile-nav-open", isOpen);
+            button.setAttribute("aria-expanded", String(isOpen));
+            button.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+        }
+
+        document.querySelectorAll("#siteNav a").forEach(link => {
+            link.addEventListener("click", () => {
+                document.getElementById("siteNav").classList.remove("open");
+                document.body.classList.remove("mobile-nav-open");
+                const button = document.querySelector(".mobile-nav-btn");
+                button.setAttribute("aria-expanded", "false");
+                button.setAttribute("aria-label", "Open navigation");
+            });
+        });
+    </script>
+</body>
+</html>

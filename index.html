@@ -78,6 +78,7 @@
             <a href="#home">Home</a>
             <a href="#featured">Featured</a>
             <a href="#projects">Work</a>
+            <a href="#early-stages">Early Stages</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
 
@@ -113,7 +114,7 @@
 
 <section id="featured">
     <h2>Featured Work</h2>
-    <p class="projects-hint">Selected projects from the complete work collection.</p>
+    <p class="projects-hint">Selected projects from the Work collection.</p>
     <div class="horizontal-scroll-fade">
     <div class="projects-grid" id="featuredScroller" role="region" aria-label="Featured projects" tabindex="0"></div>
     </div>
@@ -135,6 +136,19 @@
         <button class="scroll-arrow previous" type="button" aria-label="Previous projects" aria-controls="projectsScroller"><span aria-hidden="true">‹</span></button>
         <div class="scrollbar-track" aria-hidden="true"><span class="scrollbar-thumb"></span></div>
         <button class="scroll-arrow next" type="button" aria-label="Next projects" aria-controls="projectsScroller"><span aria-hidden="true">›</span></button>
+    </div>
+</section>
+
+<section id="early-stages">
+    <h2>Early Stages</h2>
+    <p class="projects-hint">Projects at the concept and early development stage.</p>
+    <div class="horizontal-scroll-fade">
+    <div class="projects-grid" id="earlyStagesScroller" role="region" aria-label="Early-stage projects" tabindex="0"></div>
+    </div>
+    <div class="scroll-controls">
+        <button class="scroll-arrow previous" type="button" aria-label="Previous early-stage projects" aria-controls="earlyStagesScroller"><span aria-hidden="true">‹</span></button>
+        <div class="scrollbar-track" aria-hidden="true"><span class="scrollbar-thumb"></span></div>
+        <button class="scroll-arrow next" type="button" aria-label="Next early-stage projects" aria-controls="earlyStagesScroller"><span aria-hidden="true">›</span></button>
     </div>
 </section>
 
@@ -334,7 +348,10 @@ const projects = [
         image: "images/misty.jpg",
         alt: "Misty the robot",
         href: "misty.html",
-        featured: false
+        featured: false,
+        links: [
+            { label: "GitHub | Misty", href: "https://github.com/KasuranCodes/Misty" }
+        ]
         
     },
     {
@@ -350,7 +367,7 @@ const projects = [
     },
     {
         title: "Storyboard",
-        description: "A 3D game engine built with C/C++ and Vulkan.",
+        description: "A C-based 3D rendering prototype with OpenGL, camera math, triangle transforms, and an OBJ mesh loader.",
         image: "images/pic04.jpg",
         alt: "Storyboard game engine project",
         href: "storyboard.html",
@@ -362,22 +379,25 @@ const projects = [
     },
     {
         title: "mOSs",
-        description: "A custom Ubuntu-based Linux distribution with desktop, SteamOS-style, and mobile variants, including source files and planned ISO releases.",
+        description: "An experimental Linux distribution project. Its current public code sets up a SteamOS-style gaming session on Kubuntu; other variants are planned.",
         image: "images/mOSs.svg",
         alt: "mOSs Linux distribution icon",
-        href: "https://github.com/KasuranCodes/mOSs",
+        href: "moss.html",
         featured: true,
         links: [
             { label: "GitHub | mOSs", href: "https://github.com/KasuranCodes/mOSs" },
             { label: "GitHub | ubuntu-decK", href: "https://github.com/KasuranCodes/ubuntu-decK" }
         ]
     },
+];
+
+const earlyStageProjects = [
     {
         title: "DIY Folding Handheld",
-        description: "A custom folding handheld project exploring a compact, portable form factor. Documentation and public source materials are currently in development.",
+        description: "An early concept for a custom handheld device with a folding form factor. Design details and build documentation are still in development.",
         image: "images/missing.jpg",
-        alt: "DIY folding handheld project placeholder",
-        featured: false
+        alt: "Placeholder image for the DIY folding handheld concept",
+        href: "handheld.html"
     }
 ];
 
@@ -409,12 +429,17 @@ function createProjectCard(project) {
 
 const projectsScroller = document.getElementById("projectsScroller");
 const featuredScroller = document.getElementById("featuredScroller");
+const earlyStagesScroller = document.getElementById("earlyStagesScroller");
 
 projects.forEach(project => {
     projectsScroller.appendChild(createProjectCard(project));
     if (project.featured) {
         featuredScroller.appendChild(createProjectCard(project));
     }
+});
+
+earlyStageProjects.forEach(project => {
+    earlyStagesScroller.appendChild(createProjectCard(project));
 });
 
 /* ===================== */

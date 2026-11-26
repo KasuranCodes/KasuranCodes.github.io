@@ -40,11 +40,36 @@
     <main class="project-detail">
         <h1>Storyboard</h1>
         <img src="assets/css/images/tech.jpg" alt="Technology-themed image for the Storyboard project">
-        <p>Storyboard is a work-in-progress real-time 3D game engine I am developing in C with Vulkan. The project is intended to provide a foundation for creating and animating interactive 3D scenes.</p>
+        <p>Storyboard is an experimental 3D graphics project written in C. Its source explores mesh loading, vector and triangle operations, camera projection, and a GLFW-driven render loop. The current executable path is an OpenGL prototype; the linked repository does not contain a Vulkan renderer despite the earlier card description.</p>
 
-        <h2>Project goals</h2>
-        <p>The engine is being designed around low-level GPU access and a modular architecture. Planned capabilities include lighting, shadows, texture mapping, and support for Windows and Linux.</p>
-        <p>C provides the performance and low-level control needed for this work, while Vulkan is the rendering API.</p>
+        <h2>Technical specifications</h2>
+        <dl class="project-specs">
+            <div><dt>Language</dt><dd>C</dd></div>
+            <div><dt>Window/context</dt><dd>GLFW; requests an OpenGL 3.3 Core Profile context</dd></div>
+            <div><dt>Build target</dt><dd><code>storyboard</code>, built from the root Makefile</dd></div>
+            <div><dt>Build dependencies</dt><dd>GLFW, OpenGL, GLU, Xi, dynamic-loader, pthread, and math libraries</dd></div>
+            <div><dt>Window size</dt><dd>640 × 480 in the GLFW entry point</dd></div>
+            <div><dt>Default camera</dt><dd>70° field of view; near plane 5; far plane 1000</dd></div>
+            <div><dt>Default mesh path</dt><dd><code>assets/models/tri/tri.obj</code></dd></div>
+            <div><dt>Shader assets</dt><dd>GLSL 4.60 vertex and fragment examples; not loaded by the current Makefile path</dd></div>
+        </dl>
+
+        <h2>Geometry and OBJ import</h2>
+        <p>The source defines vector, triangle, camera, projection, and object structures. The OBJ loader reads vertex records and triangular faces, converts the OBJ's one-based vertex indices to zero-based indices, expands faces into triangle structures, and assigns colours from a repeating six-colour palette. The current importer is intentionally narrow: it handles triangle faces, while texture-coordinate and normal data are not yet assembled into a rendered material pipeline.</p>
+
+        <h2>Camera and projection experiments</h2>
+        <p>The camera header contains helpers for rotating vertices and triangles, computing triangle normals, performing perspective projection, and sorting projected triangles by average depth. The camera configuration uses a 70° field of view, a 5-unit near plane, and a 1000-unit far plane. The model setup places the loaded object at z = 15.</p>
+        <p>The frame function currently leaves the rotation, perspective transform, and depth-sort calls commented out. Instead, it clears the framebuffer and draws a fixed 2D test triangle. The declared 3D pipeline is therefore a set of in-progress components, not the active frame-by-frame rendering path.</p>
+
+        <h2>Window and graphics path</h2>
+        <p>The entry point creates a 640 × 480 GLFW window, requests an OpenGL 3.3 Core Profile context, updates the viewport to the framebuffer size, and calls the project's initialization and frame functions until Escape closes the window. The Makefile links OpenGL and GLFW-related libraries on a Unix-like platform.</p>
+        <p>The repository also contains GLSL 4.60 vertex and fragment examples, but the Makefile and current frame path do not compile or load those files. In addition, the draw helper uses legacy immediate-mode calls while the window requests a Core Profile context. These parallel experiments make the repository useful for tracing the evolution of the renderer, but the graphics path needs consolidation before it can serve as a reliable engine foundation.</p>
+
+        <h2>Current scope</h2>
+        <p>Storyboard is an early graphics-engine prototype, not a finished game engine. The checked-in code does not currently provide a complete interactive 3D scene, production lighting, shadows, texture mapping, a Vulkan backend, or a demonstrated cross-platform release.</p>
+
+        <p><a href="https://github.com/KasuranCodes/StoryBoard" target="_blank" rel="noopener noreferrer">View the StoryBoard source on GitHub ↗</a></p>
+        <p><a href="https://github.com/KasuranCodes/StoryBoard-Headers" target="_blank" rel="noopener noreferrer">View the shared StoryBoard headers ↗</a></p>
         <a class="project-back" href="index.html#projects">Back to Work</a>
     </main>
 

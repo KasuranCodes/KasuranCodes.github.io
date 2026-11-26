@@ -40,17 +40,37 @@
     <main class="project-detail">
         <h1>Misty Robot</h1>
         <img src="images/misty.jpg" alt="Misty the robot">
-        <p>Misty is a pre-built robot I have programmed for human interaction and autonomous behaviours. The project combines Misty's onboard camera, voice features, and movement capabilities.</p>
+        <p>A Python-based smart-receptionist prototype for Misty. The program brings together a QR check-in flow, a visitor log, Misty's camera and voice interface, and a locally loaded language model to greet people and answer questions about AI and machine learning.</p>
 
-        <h2>Project work</h2>
-        <p>I developed a receptionist flow that reads QR codes, answers guest questions, and records guest check-ins in a database. I also explored Misty's example behaviours for detecting and following people, either by driving toward them or turning to keep them in view.</p>
-        <p>The work has been presented at two events in Newcastle, demonstrating the receptionist program alongside other capabilities provided by Misty's manufacturer.</p>
+        <h2>Technical overview</h2>
+        <dl class="project-specs">
+            <div><dt>Language</dt><dd>Python</dd></div>
+            <div><dt>Robot integration</dt><dd>Misty Python SDK</dd></div>
+            <div><dt>QR scanning</dt><dd>Misty camera capture at 640 × 480; OpenCV QRCodeDetector</dd></div>
+            <div><dt>Conversation model</dt><dd>GPT4All with Llama 3.2 1B Instruct</dd></div>
+            <div><dt>Speech input</dt><dd>Misty audio capture and SpeechRecognition transcription</dd></div>
+            <div><dt>Visitor storage</dt><dd>Local JSON file at output/visitor_info.json</dd></div>
+        </dl>
 
-        <h2>Demonstration</h2>
+        <h2>Visitor check-in flow</h2>
+        <p>The robot repeatedly captures an image and returns it to the host program as base64 data. Python decodes the image to a file, then OpenCV's <code>QRCodeDetector</code> scans it. The QR payload is expected to contain comma-separated key/value fields such as <code>Name</code>, <code>Company</code>, and <code>IDNum</code>.</p>
+        <p>The program compares the decoded name with its in-memory visitor list. A new visitor is added and the visit count is incremented; repeat visitors have their visit amount updated. The list and count are serialized to <code>output/visitor_info.json</code>. The repository also includes sample QR images and a small QR-generation script for preparing test data.</p>
+
+        <h2>Speech and question answering</h2>
+        <p>For a connected Misty, the application calls the robot's speech and audio-capture methods. It waits for the configured wake phrase, retrieves the captured audio, and passes it through the SpeechRecognition package's Google recognizer. GPT4All loads the Llama 3.2 1B Instruct model and generates short answers inside a chat session. The conversation asks whether the visitor has more questions and provides a closing prompt when the session ends.</p>
+        <p>The code includes separate connected-robot, text-only, and fallback speech/output classes. A text-only path can exercise the receptionist dialogue without a robot, while a local GPT model handles response generation. Speech transcription itself uses an internet-backed recognizer; the project documentation also lists platform-specific audio and model runtime dependencies.</p>
+
+        <h2>Repository structure and operation</h2>
+        <p>The main entry point lives in <code>programs/</code>; <code>additional_files/</code> contains the receptionist iterations, QR generator, and experiments. QR test images are kept in <code>qr_codes/</code>. The program loads visitor records at startup and then repeats the scan, greet, and question-answer cycle. The video below shows the project in use.</p>
+
+        <h2>Current scope</h2>
+        <p>This is a prototype rather than a hardened reception or visitor-management product. It relies on a reachable robot, working camera and audio, a compatible local model runtime, and network-backed speech transcription. Visitor records are stored in a simple local JSON file, not a database or managed identity service.</p>
+
         <video controls>
             <source src="videos/Mistyvideo.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+        <p><a href="https://github.com/KasuranCodes/Misty" target="_blank" rel="noopener noreferrer">Explore the Misty receptionist source and scripts on GitHub ↗</a></p>
         <a class="project-back" href="index.html#projects">Back to Work</a>
     </main>
 

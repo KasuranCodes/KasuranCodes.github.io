@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIY Folding Handheld | Max McGill</title>
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/main2.css">
+</head>
+<body>
+    <div class="nav-container">
+        <nav>
+            <button class="mobile-nav-btn" onclick="toggleMobileNav()" aria-label="Open navigation" aria-expanded="false" aria-controls="siteNav"><i class="fas fa-bars" aria-hidden="true"></i></button>
+            <svg class="deco" viewBox="0 0 100 50"><path d="M0 50 L50 0 L100 50"/></svg>
+            <div class="nav-links" id="siteNav">
+                <a href="index.html#home">Home</a>
+                <a href="index.html#projects">Work</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+                <div class="theme-selector" style="position:relative;">
+                    <button class="icon-btn theme-btn" onclick="toggleThemePanel()" aria-label="Theme options" aria-expanded="false" aria-controls="themePanel"><i class="fas fa-palette" aria-hidden="true"></i></button>
+                    <div class="theme-panel" id="themePanel">
+                        <button class="color-option dark" onclick="changeTheme('dark')" title="Dark"></button>
+                        <button class="color-option green" onclick="changeTheme('green')" title="Green"></button>
+                        <button class="color-option light" onclick="changeTheme('light')" title="Light"></button>
+                    </div>
+                </div>
+            </div>
+            <svg class="deco" viewBox="0 0 100 50"><path d="M0 50 L50 0 L100 50"/></svg>
+        </nav>
+    </div>
+
+    <main class="project-detail">
+        <h1>DIY Folding Handheld</h1>
+        <img src="images/missing.jpg" alt="Placeholder image for the DIY folding handheld project">
+        <p>This project is an exploration of a custom handheld device with a folding form factor. The aim is to investigate how a portable device could fold into a more compact shape when it is not in use.</p>
+
+        <h2>Project status</h2>
+        <p>There is currently no source repository, technical specification, or build log linked from the portfolio for this project. The public description identifies the folding handheld concept, but does not document its electronics, display, hinge design, software, or completed prototype. This page therefore records the project at its current documented scope rather than guessing at engineering decisions that have not been published.</p>
+
+        <h2>Documentation in progress</h2>
+        <p>As design work is published, this page can grow to cover the enclosure and hinge, component choices, input and display layout, software, and lessons from prototyping. Until then, the project remains an early concept with its documentation and public source materials in development.</p>
+
+        <a class="project-back" href="index.html#early-stages">Back to Early Stages</a>
+    </main>
+
+    <script>
+        function changeTheme(theme) {
+            document.body.classList.remove("light", "green");
+            if (theme === "light") document.body.classList.add("light");
+            if (theme === "green") document.body.classList.add("green");
+            document.getElementById("themePanel").classList.remove("open");
+            document.querySelector(".theme-btn").setAttribute("aria-expanded", "false");
+        }
+
+        function toggleThemePanel() {
+            const panel = document.getElementById("themePanel");
+            const isOpen = panel.classList.toggle("open");
+            document.querySelector(".theme-btn").setAttribute("aria-expanded", String(isOpen));
+        }
+
+        function toggleMobileNav() {
+            const menu = document.getElementById("siteNav");
+            const isOpen = menu.classList.toggle("open");
+            const button = document.querySelector(".mobile-nav-btn");
+            document.body.classList.toggle("mobile-nav-open", isOpen);
+            button.setAttribute("aria-expanded", String(isOpen));
+            button.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+        }
+
+        document.querySelectorAll("#siteNav a").forEach(link => {
+            link.addEventListener("click", () => {
+                document.getElementById("siteNav").classList.remove("open");
+                document.body.classList.remove("mobile-nav-open");
+                const button = document.querySelector(".mobile-nav-btn");
+                button.setAttribute("aria-expanded", "false");
+                button.setAttribute("aria-label", "Open navigation");
+            });
+        });
+    </script>
+</body>
+</html>
