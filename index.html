@@ -45,12 +45,12 @@
 
 <!-- ACCESSIBILITY -->
 <div class="accessibility-wrapper">
-    <button class="accessibility-btn" onclick="toggleAccessibility()" aria-label="Accessibility options">📖</button>
+    <button class="accessibility-btn" onclick="toggleAccessibility()" aria-label="Accessibility options" aria-expanded="false" aria-controls="accessPanel"><i class="fas fa-universal-access" aria-hidden="true"></i></button>
     <div class="accessibility-panel" id="accessPanel">
-        <button class="icon-btn" onclick="toggleClass('high-contrast')" aria-label="Toggle High Contrast" data-tooltip="High Contrast">🔲</button>
-        <button class="icon-btn" onclick="toggleClass('large-text')" aria-label="Toggle Large Text" data-tooltip="Large Text">🔤</button>
+        <button class="icon-btn" onclick="toggleClass('high-contrast')" aria-label="Toggle High Contrast" data-tooltip="High Contrast"><i class="fas fa-adjust" aria-hidden="true"></i></button>
+        <button class="icon-btn" onclick="toggleClass('large-text')" aria-label="Toggle Large Text" data-tooltip="Large Text"><i class="fas fa-text-height" aria-hidden="true"></i></button>
         <div class="highlight-selector">
-            <button class="icon-btn highlight-btn" onclick="toggleHighlightPanel()" aria-label="Text highlight colors" data-tooltip="Text Highlight">🖍️</button>
+            <button class="icon-btn highlight-btn" onclick="toggleHighlightPanel()" aria-label="Text highlight colors" data-tooltip="Text Highlight"><i class="fas fa-highlighter" aria-hidden="true"></i></button>
             <div class="highlight-panel" id="highlightPanel">
                 <button class="color-option yellow" onclick="setHighlightColor('yellow')" title="Yellow"></button>
                 <button class="color-option lightgreen" onclick="setHighlightColor('lightgreen')" title="Light Green"></button>
@@ -60,9 +60,8 @@
                 <button class="color-option none" onclick="setHighlightColor('')" title="None" style="border-style:dashed;">×</button>
             </div>
         </div>
-        <button class="icon-btn" onclick="toggleClass('reduce-motion')" aria-label="Toggle Reduce Motion" data-tooltip="Reduce Motion">⏸️</button>
-        <button class="icon-btn" onclick="resetAccessibility()" aria-label="Reset preferences" data-tooltip="Reset">🗘</button>
-        <button class="icon-btn" onclick="resetAccessibility()" aria-label="Reset preferences" data-tooltip="Reset">🗘</button>
+        <button class="icon-btn" onclick="toggleClass('reduce-motion')" aria-label="Toggle Reduce Motion" data-tooltip="Reduce Motion"><i class="fas fa-pause" aria-hidden="true"></i></button>
+        <button class="icon-btn" onclick="resetAccessibility()" aria-label="Reset preferences" data-tooltip="Reset"><i class="fas fa-undo" aria-hidden="true"></i></button>
     
     </div>
 </div>
@@ -70,21 +69,25 @@
 <!-- NAV -->
 <div class="nav-container">
     <nav>
+        <button class="mobile-nav-btn" onclick="toggleMobileNav()" aria-label="Open navigation" aria-expanded="false" aria-controls="siteNav"><i class="fas fa-bars" aria-hidden="true"></i></button>
         <svg class="deco" viewBox="0 0 100 50">
             <path d="M0 50 L50 0 L100 50"/>
         </svg>
 
-        <a href="#home">Home</a>
-        <a href="#projects">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <div class="nav-links" id="siteNav">
+            <a href="#home">Home</a>
+            <a href="#featured">Featured</a>
+            <a href="#projects">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
 
-        <div class="theme-selector" style="position:relative;">
-            <button class="icon-btn theme-btn" onclick="toggleThemePanel()" aria-label="Theme options">🎨</button>
-            <div class="theme-panel" id="themePanel">
-                <button class="color-option dark" onclick="changeTheme('dark')" title="Dark"></button>
-                <button class="color-option green" onclick="changeTheme('green')" title="Green"></button>
-                <button class="color-option light" onclick="changeTheme('light')" title="Light"></button>
+            <div class="theme-selector" style="position:relative;">
+                <button class="icon-btn theme-btn" onclick="toggleThemePanel()" aria-label="Theme options" aria-expanded="false" aria-controls="themePanel"><i class="fas fa-palette" aria-hidden="true"></i></button>
+                <div class="theme-panel" id="themePanel">
+                    <button class="color-option dark" onclick="changeTheme('dark')" title="Dark"></button>
+                    <button class="color-option green" onclick="changeTheme('green')" title="Green"></button>
+                    <button class="color-option light" onclick="changeTheme('light')" title="Light"></button>
+                </div>
             </div>
         </div>
 
@@ -97,7 +100,7 @@
 
 
 <section id="home">
-    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; text-align: center;">
+    <div class="home-content">
         <h1>Max McGill</h1>
         <p>Software Developer, Robotics Engineer</p>
         <div class = "home-buttons">
@@ -108,68 +111,30 @@
     </div>
 </section>
 
+<section id="featured">
+    <h2>Featured Work</h2>
+    <p class="projects-hint">Selected projects from the complete work collection.</p>
+    <div class="horizontal-scroll-fade">
+    <div class="projects-grid" id="featuredScroller" role="region" aria-label="Featured projects" tabindex="0"></div>
+    </div>
+    <div class="scroll-controls">
+        <button class="scroll-arrow previous" type="button" aria-label="Previous featured projects" aria-controls="featuredScroller"><span aria-hidden="true">‹</span></button>
+        <div class="scrollbar-track" aria-hidden="true"><span class="scrollbar-thumb"></span></div>
+        <button class="scroll-arrow next" type="button" aria-label="Next featured projects" aria-controls="featuredScroller"><span aria-hidden="true">›</span></button>
+    </div>
+</section>
+
 <section id="projects">
     <h2>Work</h2>
-    <div class="projects-grid">
-        <div class="project-card">
-            <h2>Misty Robot</h2>
-            <span class="image left"><img src="images/misty.jpg" width = 300px/></span>
-            <h2>Overview</h2>
-            <p>Misty is a multi-functional pre-built robot that I have been programming to achieve multiple objectives:</p>
-            <ul>
-                <li>1 | Receptionist - I have created a program that allows Misty to use her camera to identify QR codes, answer questions from guests, and check guests into a database.</li>
-                <li>2 | Following People - Using the example programs, Misty is capable of detecting and following people whether that's by driving towards them or just turning in place so she can see them.</li>
-            </ul>
-            <p>Misty has been presented at two events within Newcastle, where this program was shown-off as well as her other capabilities as provided by the example programs from her manufacturer.</p>
-
-            <h2>Features</h2>
-            <ul>
-                <li>QR Code Detection and Reading</li>
-                <li>GPT-Based Text Synthesis</li>
-                <li>Text-to-Speech</li>
-                <li>Speech-to-Text</li>
-                <li>Following Humans</li>
-            </ul>
-        </div>
-        <div class="project-card">
-            <h2>Roller Coaster Automation</h2>
-            <span><img src="images/stm.jpg" width = 300px/></span>
-            <p>This project involved automating a roller coaster ride using a combination of sensors, actuators, and control systems. The goal was to create a seamless and safe experience for riders while optimizing the ride's performance.</p>
-            <p>An STM microcontroller was used to monitor and control the braking system so that is safe for users. It allows a user to input physical parameters such as weight, speed, brake force, brake time, and pulse distance through a serial terminal during startup. These values are stored and used by the system to simulate or manage braking behaviour. The system operates using a structured state machine, ensuring the device moves through defined operating modes such as initial setup, manual control, automatic operation, and safe mode.</p>
-        </div>
-        <div class="project-card" style ="grid-column: span 2;">
-            <h2>Storyboard</h2>
-            <h3>Brief</h3>
-            <p>Storyboard is a work in progress project that I have been working on to create a game engine capable of rendering and animating 3D scenes in real-time. The engine is built using C and Vulkan, and it supports features such as lighting, shadows, and texture mapping.</p>
-            
-            <h3>Overview</h3>
-            <p>Storyboard is designed to be a flexible and powerful tool for game developers, allowing them to create complex and immersive gaming experiences. The engine is built on top of the Vulkan API, which provides low-level access to the GPU and allows for high-performance rendering.</p>
-            <p>C was chosen for its performance and low-level control over system resources as well as my familiarity and enjoyment of it.</p>
-            
-            <h3>Spec</h3>
-            <ul>
-                <li>Real-Time 3D Rendering</li>
-                <li>Lighting and Shadows</li>
-                <li>Texture Mapping</li>
-                <li>Cross-Platform Support</li>
-                <ul>
-                    <li>Windows</li>
-                    <li>Linux</li>
-                </ul>
-                <li>Modular Architecture</li>
-                <ul>
-                    <li>Custom Scripts for game logic so that different genres and styles of games can be created.</li>
-                </ul>
-            </ul>
-
-        </div>
-        <!-- <div class="project-card">
-            <h2>Robotic Drone Skins Module</h2>
-            <span class="image left"><img src="images/Soapomorph.png" width = 300px/></span>
-            
-            
-            
-        </div> -->
+    <p class="projects-hint">Swipe or scroll horizontally to explore projects.</p>
+    <div class="horizontal-scroll-fade">
+    <div class="projects-grid" id="projectsScroller" role="region" aria-label="Projects" tabindex="0">
+    </div>
+    </div>
+    <div class="scroll-controls">
+        <button class="scroll-arrow previous" type="button" aria-label="Previous projects" aria-controls="projectsScroller"><span aria-hidden="true">‹</span></button>
+        <div class="scrollbar-track" aria-hidden="true"><span class="scrollbar-thumb"></span></div>
+        <button class="scroll-arrow next" type="button" aria-label="Next projects" aria-controls="projectsScroller"><span aria-hidden="true">›</span></button>
     </div>
 </section>
 
@@ -186,8 +151,8 @@
             <div class="about-text">
                 <h3>Education</h3> 
                 <ul>
+                    <li>First in BSc AI and Robotics - Staffordshire Uni (Stoke on Trent)</li>
                     <li>Distinction in Engineering - Newcastle Stafford College Group (NSCG)</li>
-                    <li>Expected First in BSc AI and Robotics - Staffordshire Uni (Stoke)</li>
                 </ul>
                 <h3>Certifications</h3> 
                 <ul>
@@ -195,9 +160,10 @@
                     <li>Amazon Web Services (AWS)</li>
                 </ul>
             </div>
-            <p style="padding-top: 45%;"></p>
             <h3>Skills</h3>
-            <div class="skills-grid">
+            <p class="projects-hint">Swipe or scroll horizontally to explore skills.</p>
+            <div class="horizontal-scroll-fade">
+            <div class="skills-grid" id="skillsScroller" role="region" aria-label="Skills" tabindex="0">
                 <div class="project-card">
                     <h4>Programming Languages</h4>
                     <ul>
@@ -270,7 +236,7 @@
                         <li>Natural Language Processing</li>
                     </ul>
                 </div>
-                <div class="project-card">
+                <div class="project-card technical-skills">
                     <h4>Technical Skills</h4>
                     <ul>
                         <li>AutoCAD</li>
@@ -289,6 +255,12 @@
                     </ul>
                 </div>
             </div>
+            </div>
+            <div class="scroll-controls">
+                <button class="scroll-arrow previous" type="button" aria-label="Previous skills" aria-controls="skillsScroller"><span aria-hidden="true">‹</span></button>
+                <div class="scrollbar-track" aria-hidden="true"><span class="scrollbar-thumb"></span></div>
+                <button class="scroll-arrow next" type="button" aria-label="Next skills" aria-controls="skillsScroller"><span aria-hidden="true">›</span></button>
+            </div>
             <h3>Interests</h3>
             <ul>
                 <li>Robotics</li>
@@ -297,7 +269,7 @@
                 <li>Open Source Software</li>
                 <li>Electronic Hardware</li>
             </ul>
-            <p style="padding-top: 10%;">An example of a project that I am currently working on is a robotic arm. This originated as a hobby of mine which I was able to pursue further in my studies as a final year project. Not only did this allow me to expand my available resources and refine my knowledge, but it required plenty of the skills I have developed over the past 7 years. This included my ability to problem solve and my in-depth understanding of software development interlinked with mechanical engineering. When combined, this produced a design that is functional, budget friendly with simple assembly without sacrificing dexterity or mobility.</p>
+            <p class="about-project">An example of a project that I am currently working on is a robotic arm. This originated as a hobby of mine which I was able to pursue further in my studies as a final year project. Not only did this allow me to expand my available resources and refine my knowledge, but it required plenty of the skills I have developed over the past 7 years. This included my ability to problem solve and my in-depth understanding of software development interlinked with mechanical engineering. When combined, this produced a design that is functional, budget friendly with simple assembly without sacrificing dexterity or mobility.</p>
             <p>Having started this project a few years ago, it required me to adapt and learn to use different resources and tools that I had little experience in. Programming in C++ and 3D modelling were two of the skills that I learnt in order to help achieve my end goal. Overall, pushing myself to complete this project lead me from basic knowledge to a much greater understanding, not only of the resources I use to develop my ideas into reality, but also of my ability to adapt and learn skills necessary for whatever I am faced with. </p>
         </div>
         
@@ -306,7 +278,7 @@
 
 <section id="contact">
     <h2>Contact</h2>
-    <p>Email: max.mcgill.speaking@outlook.com</p>
+    <p>Email: m.softwaredev@outlook.com</p>
     <p>LinkedIn: <a href="https://www.linkedin.com/in/max-mcgill">Max McGill </a></p>
     <p>GitHub: <a href="https://github.com/KasuranCodes">KasuranCodes</a></p>
     <p>Instagram: <a href="https://www.instagram.com/max.mcgill.nexus/">max.mcgill.nexus</a></p>
@@ -349,6 +321,101 @@
 </body>
 </html>
 <script>
+
+/* ===================== */
+/* PROJECT CARDS */
+/* ===================== */
+
+// Edit project information here. Featured cards are selected with "featured: true".
+const projects = [
+    {
+        title: "Misty Robot",
+        description: "A robotics project exploring human interaction, QR code recognition, and autonomous behaviours.",
+        image: "images/misty.jpg",
+        alt: "Misty the robot",
+        href: "misty.html",
+        featured: false
+        
+    },
+    {
+        title: "Roller Coaster Automation",
+        description: "An STM microcontroller project for configuring and controlling a roller coaster braking system.",
+        image: "images/stm.jpg",
+        alt: "Roller coaster automation project",
+        href: "stm.html",
+        featured: true,
+        links: [
+            { label: "GitHub", href: "https://github.com/KasuranCodes/STM32-Rollercoaster" }
+        ]
+    },
+    {
+        title: "Storyboard",
+        description: "A 3D game engine built with C/C++ and Vulkan.",
+        image: "images/pic04.jpg",
+        alt: "Storyboard game engine project",
+        href: "storyboard.html",
+        featured: true,
+        links: [
+            { label: "GitHub | StoryBoard", href: "https://github.com/KasuranCodes/StoryBoard" },
+            { label: "GitHub | StoryBoard-Headers", href: "https://github.com/KasuranCodes/StoryBoard-Headers" }
+        ]
+    },
+    {
+        title: "mOSs",
+        description: "A custom Ubuntu-based Linux distribution with desktop, SteamOS-style, and mobile variants, including source files and planned ISO releases.",
+        image: "images/mOSs.svg",
+        alt: "mOSs Linux distribution icon",
+        href: "https://github.com/KasuranCodes/mOSs",
+        featured: true,
+        links: [
+            { label: "GitHub | mOSs", href: "https://github.com/KasuranCodes/mOSs" },
+            { label: "GitHub | ubuntu-decK", href: "https://github.com/KasuranCodes/ubuntu-decK" }
+        ]
+    },
+    {
+        title: "DIY Folding Handheld",
+        description: "A custom folding handheld project exploring a compact, portable form factor. Documentation and public source materials are currently in development.",
+        image: "images/missing.jpg",
+        alt: "DIY folding handheld project placeholder",
+        featured: false
+    }
+];
+
+function createProjectCard(project) {
+    const card = document.createElement("article");
+    card.className = "project-card work-card";
+
+    const cardContent = `
+        <img src="${project.image}" alt="${project.alt}" />
+        <div class="project-card-content">
+            <h3>${project.title}</h3>
+            <p>${project.description}</p>
+        </div>`;
+
+    if (project.href) {
+        const external = /^https?:/.test(project.href);
+        card.insertAdjacentHTML("beforeend", `<a class="project-card-link" href="${project.href}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>${cardContent}</a>`);
+    } else {
+        card.insertAdjacentHTML("beforeend", `<div class="project-card-link">${cardContent}</div>`);
+    }
+
+    (project.links || []).forEach(link => {
+        const external = /^https?:/.test(link.href);
+        card.insertAdjacentHTML("beforeend", `<a class="project-github" href="${link.href}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>${link.label} <span aria-hidden="true">↗</span></a>`);
+    });
+
+    return card;
+}
+
+const projectsScroller = document.getElementById("projectsScroller");
+const featuredScroller = document.getElementById("featuredScroller");
+
+projects.forEach(project => {
+    projectsScroller.appendChild(createProjectCard(project));
+    if (project.featured) {
+        featuredScroller.appendChild(createProjectCard(project));
+    }
+});
 
 /* ===================== */
 /* BACKGROUND GRID */
@@ -408,11 +475,33 @@ function changeTheme(theme) {
     if (theme === "green") document.body.classList.add("green");
     // collapse dropdown after selection
     document.getElementById('themePanel').classList.remove('open');
+    document.querySelector('.theme-btn').setAttribute('aria-expanded', 'false');
 }
 
 function toggleThemePanel() {
-    document.getElementById('themePanel').classList.toggle('open');
+    const panel = document.getElementById('themePanel');
+    const isOpen = panel.classList.toggle('open');
+    document.querySelector('.theme-btn').setAttribute('aria-expanded', String(isOpen));
 }
+
+function toggleMobileNav() {
+    const menu = document.getElementById('siteNav');
+    const isOpen = menu.classList.toggle('open');
+    const button = document.querySelector('.mobile-nav-btn');
+    document.body.classList.toggle('mobile-nav-open', isOpen);
+    button.setAttribute('aria-expanded', String(isOpen));
+    button.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+}
+
+document.querySelectorAll('#siteNav a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('siteNav').classList.remove('open');
+        document.body.classList.remove('mobile-nav-open');
+        const button = document.querySelector('.mobile-nav-btn');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-label', 'Open navigation');
+    });
+});
 
 /* ===================== */
 /* ACCESSIBILITY */
@@ -420,7 +509,8 @@ function toggleThemePanel() {
 
 function toggleAccessibility() {
     const panel = document.getElementById("accessPanel");
-    panel.classList.toggle('open');
+    const isOpen = panel.classList.toggle('open');
+    document.querySelector('.accessibility-btn').setAttribute('aria-expanded', String(isOpen));
 }
 
 function toggleClass(className) {
@@ -454,7 +544,71 @@ function resetAccessibility() {
     );
     const selector = document.getElementById('highlightColor');
     if(selector) selector.value = '';
+    document.getElementById('accessPanel').classList.remove('open');
+    document.getElementById('highlightPanel').classList.remove('open');
+    document.querySelector('.accessibility-btn').setAttribute('aria-expanded', 'false');
 }
+
+document.querySelectorAll('.projects-grid, .skills-grid').forEach(scroller => {
+    const fadeContainer = scroller.parentElement;
+    const controls = fadeContainer.nextElementSibling;
+    const track = controls.querySelector('.scrollbar-track');
+    const thumb = track.querySelector('.scrollbar-thumb');
+    const previousButton = controls.querySelector('.scroll-arrow.previous');
+    const nextButton = controls.querySelector('.scroll-arrow.next');
+
+    function updateScrollbarThumb() {
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        const thumbWidth = scroller.clientWidth / scroller.scrollWidth * 100;
+        const containerRect = fadeContainer.getBoundingClientRect();
+        const edgeWidth = parseFloat(getComputedStyle(fadeContainer, '::after').width);
+
+        function setEdgeFade(side) {
+            const edgeStart = side === 'left' ? containerRect.left : containerRect.right - edgeWidth;
+            const edgeEnd = side === 'left' ? containerRect.left + edgeWidth : containerRect.right;
+            const cardsAtEdge = [...scroller.children]
+                .map(card => card.getBoundingClientRect())
+                .filter(rect => rect.right > edgeStart && rect.left < edgeEnd);
+
+            if (!cardsAtEdge.length) return false;
+
+            const top = Math.max(containerRect.top, Math.min(...cardsAtEdge.map(rect => rect.top))) - containerRect.top;
+            const bottom = containerRect.bottom - Math.min(containerRect.bottom, Math.max(...cardsAtEdge.map(rect => rect.bottom)));
+            fadeContainer.style.setProperty(`--fade-${side}-top`, `${top}px`);
+            fadeContainer.style.setProperty(`--fade-${side}-bottom`, `${bottom}px`);
+            return true;
+        }
+
+        const leftCardAtEdge = setEdgeFade('left');
+        const rightCardAtEdge = setEdgeFade('right');
+        controls.hidden = maxScroll <= 1;
+        fadeContainer.classList.toggle('can-scroll-left', leftCardAtEdge && scroller.scrollLeft > 1);
+        fadeContainer.classList.toggle('can-scroll-right', rightCardAtEdge && scroller.scrollLeft < maxScroll - 1);
+
+        if (controls.hidden) return;
+
+        thumb.style.width = `${thumbWidth}%`;
+        thumb.style.left = `${scroller.scrollLeft / maxScroll * (100 - thumbWidth)}%`;
+        previousButton.disabled = scroller.scrollLeft <= 1;
+        nextButton.disabled = scroller.scrollLeft >= maxScroll - 1;
+    }
+
+    previousButton.addEventListener('click', () => {
+        scroller.scrollBy({
+            left: -scroller.clientWidth * 0.8,
+            behavior: document.body.classList.contains('reduce-motion') || window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+        });
+    });
+    nextButton.addEventListener('click', () => {
+        scroller.scrollBy({
+            left: scroller.clientWidth * 0.8,
+            behavior: document.body.classList.contains('reduce-motion') || window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+        });
+    });
+    scroller.addEventListener('scroll', updateScrollbarThumb, { passive: true });
+    window.addEventListener('resize', updateScrollbarThumb);
+    updateScrollbarThumb();
+});
 
 /* ===================== */
 /* SECTION ANIMATION */
@@ -482,9 +636,8 @@ const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add("show");
     });
-}, { threshold: 0.2 });
+}, { threshold: 0.01 });
 
 sections.forEach(section => observer.observe(section));
 
 </script>
-

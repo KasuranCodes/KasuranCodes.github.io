@@ -292,6 +292,7 @@ input, select, textarea {
 	}
 
 	pre {
+		position: relative;
 		-webkit-overflow-scrolling: touch;
 		font-family: "Courier New", monospace;
 		font-size: 0.9em;
@@ -3160,8 +3161,48 @@ input, select, textarea {
 /* Table */
 
 	.table-wrapper {
+		position: relative;
 		-webkit-overflow-scrolling: touch;
 		overflow-x: auto;
+	}
+
+	.horizontal-scroll-fade {
+		position: relative;
+		isolation: isolate;
+	}
+
+	.horizontal-scroll-fade:before,
+	.horizontal-scroll-fade:after {
+		position: absolute;
+		z-index: 1;
+		top: 0;
+		bottom: 0;
+		width: 40px;
+		content: '';
+		opacity: 0;
+		pointer-events: none;
+		-webkit-backdrop-filter: blur(4px);
+		backdrop-filter: blur(4px);
+		transition: opacity 0.18s ease;
+	}
+
+	.horizontal-scroll-fade:before {
+		left: 0;
+		background: linear-gradient(90deg, rgba(0, 0, 0, 0.16), transparent 90%);
+		-webkit-mask-image: linear-gradient(90deg, #000, transparent);
+		mask-image: linear-gradient(90deg, #000, transparent);
+	}
+
+	.horizontal-scroll-fade:after {
+		right: 0;
+		background: linear-gradient(270deg, rgba(0, 0, 0, 0.16), transparent 90%);
+		-webkit-mask-image: linear-gradient(270deg, #000, transparent);
+		mask-image: linear-gradient(270deg, #000, transparent);
+	}
+
+	.horizontal-scroll-fade.can-scroll-left:before,
+	.horizontal-scroll-fade.can-scroll-right:after {
+		opacity: 1;
 	}
 
 	table {

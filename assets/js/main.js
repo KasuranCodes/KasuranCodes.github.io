@@ -10,6 +10,32 @@
 		$body = $('body'),
 		$sidebar = $('#sidebar');
 
+	// Indicate additional content at the edges of horizontal scrollers.
+		$('.table-wrapper, pre').each(function() {
+
+			var $frame = $(this),
+				$scroller = $frame.is('pre') ? $frame.find('code') : $frame;
+
+			if (!$scroller.length)
+				return;
+
+			$frame.addClass('horizontal-scroll-fade');
+
+			var updateEdges = function() {
+				var element = $scroller[0],
+					maxScroll = element.scrollWidth - element.clientWidth;
+
+				$frame
+					.toggleClass('can-scroll-left', element.scrollLeft > 1)
+					.toggleClass('can-scroll-right', element.scrollLeft < maxScroll - 1);
+			};
+
+			$scroller.on('scroll', updateEdges);
+			$window.on('resize', updateEdges);
+			updateEdges();
+
+		});
+
 	// Breakpoints.
 		breakpoints({
 			xlarge:   [ '1281px',  '1680px' ],
